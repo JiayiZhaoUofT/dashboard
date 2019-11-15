@@ -34,14 +34,3 @@ const SideBar = () => {
   );
 };
 export default SideBar;
-
-const style = {
-  navItemSelected: {
-    backgroundColor: "grey",
-    color: "black"
-  },
-  navItem: {
-    backgroundColor: "red",
-    color: "white"
-  }
-};

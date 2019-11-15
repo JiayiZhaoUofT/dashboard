@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, CardTitle, CardBody, CardText } from "reactstrap";
+import { CardTitle, CardBody, CardText } from "reactstrap";
 import { QueryRenderer } from "@cubejs-client/react";
 
 const Chart = ({ cubejsApi, title, query, render }) => (

@@ -7,8 +7,7 @@ import {
   CardTitle,
   Card,
   CardBody,
-  CardText,
-  CardGroup
+  CardText
 } from "reactstrap";
 import {
   AreaChart,
