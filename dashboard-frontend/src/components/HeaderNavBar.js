@@ -11,20 +11,17 @@ import React from "react";
 
 const HeaderNavBar = () => {
   return (
-    <Navbar color="light">
+    <Navbar className="navBar">
       <NavbarBrand>
-        <img src="images/logo.jpg" height="40"></img>
+        <img src="images/logo.jpg" height="50"></img>
         Tasteguru
       </NavbarBrand>
       <Nav tabs>
         <NavItem>
-          <NavLink>Home</NavLink>
+          <NavLink>Login</NavLink>
         </NavItem>
         <NavItem>
-          <NavLink>My Dashboard</NavLink>
-        </NavItem>
-        <NavItem>
-          <NavLink>others</NavLink>
+          <NavLink>Logout</NavLink>
         </NavItem>
       </Nav>
     </Navbar>
