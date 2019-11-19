@@ -77,3 +77,14 @@ export const data03 = [
 ];
 export const colorOneItem = ["#ffa600", "#c6c6c6"];
 export const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
+
+export const data04 = [
+  {
+    name: "conversion",
+    value: 0.17
+  },
+  {
+    name: "others",
+    value: 0.83
+  }
+];

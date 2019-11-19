@@ -1,8 +1,9 @@
-/* .sideNavBar {
-  height: 100%;
+.mr-2 {
+  width: 20px;
+  height: 20px;
+  position: relative;
+  z-index: 100;
 }
-
-.link {
-  background-color: aqua;
-  color: red;
-} */
+.active {
+  background-color: aquamarine;
+}

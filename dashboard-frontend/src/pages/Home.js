@@ -29,8 +29,9 @@ import numeral from "numeral";
 import cubejs from "@cubejs-client/core";
 import Chart from "../components/Chart";
 import LineSeparator from "../components/LineSeperator";
-import { data02, COLORS, data03 } from "../data/CTR1";
-
+import { data02, COLORS, data03, data04, colorOneItem } from "../data/CTR1";
+import "../css/home.css";
+import ChangeRate from "../components/ChangeRate";
 const cubejsApi = cubejs(process.env.REACT_APP_CUBEJS_TOKEN, {
   apiUrl: process.env.REACT_APP_API_URL
 });
@@ -42,16 +43,19 @@ const renderSingleValue = (resultSet, key) => (
 );
 const Home = () => {
   return (
-    <Container fluid className="mainPageContent">
+    <Container>
       <CardTitle tag="h4" style={{ color: "#8884d8" }}>
         Home Overall Analytics
       </CardTitle>
       <Row>
         <Col sm="4">
-          <Card>
+          <Card style={{ minHeight: "220px" }}>
             <CardBody>
-              <CardTitle tag="h5">Revenue Share</CardTitle>
-              <CardText tag="h1">$20000/40000</CardText>
+              <CardTitle tag="h5" className="cardHeader">
+                Revenue Share
+              </CardTitle>
+              <CardText tag="h3">$20000/40000</CardText>
+              <ChangeRate change="increase" number="12%"></ChangeRate>
               <LineSeparator />
               <CardText>
                 50% of your Revenue is driven by Recommendation Kit
@@ -60,22 +64,30 @@ const Home = () => {
           </Card>
         </Col>
         <Col sm="4">
-          <Card>
+          <Card style={{ minHeight: "220px" }}>
             <CardBody>
-              <CardTitle tag="h5">Products Sold</CardTitle>
-              <CardText tag="h1">40 /50</CardText>
+              <CardTitle tag="h5" className="cardHeader">
+                Products Sold
+              </CardTitle>
+              <CardText tag="h3">4012</CardText>
               <LineSeparator />
               <CardText>
-                80% of your products are sold by Recommendation Kit
+                50% of your products are sold by Recommendation Kit
               </CardText>
             </CardBody>
           </Card>
         </Col>
         <Col sm="4">
-          <Card>
+          <Card style={{ minHeight: "220px" }}>
             <CardBody>
-              <CardTitle tag="h5">Page Views</CardTitle>
-              <CardText tag="h1">780</CardText>
+              <CardTitle tag="h5" className="cardHeader">
+                Page Views
+              </CardTitle>
+              <CardText tag="h3">7800</CardText>
+              <LineSeparator />
+              <CardText>
+                The recommendation pages are viewed 7800 times.
+              </CardText>
             </CardBody>
           </Card>
         </Col>
@@ -83,52 +95,50 @@ const Home = () => {
       <br></br>
       <Row>
         <Col xs="3">
-          <Card>
+          <Card style={{ minHeight: "200px" }}>
             <CardBody>
-              <CardTitle tag="h5">Quiz</CardTitle>
-              <CardText tag="h1">3400</CardText>
+              <CardTitle tag="h5" className="cardHeader">
+                Quiz Done
+              </CardTitle>
+              <CardText tag="h3">3400</CardText>
               <LineSeparator />
-              <CardText>
-                3400 times quiz were done by 3140 users to get recommendation
-                products
-              </CardText>
+              <CardText>The quiz was taken 3400 times.</CardText>
             </CardBody>
           </Card>
         </Col>
         <Col xs="3">
-          <Card>
+          <Card style={{ minHeight: "200px" }}>
             <CardBody>
-              <CardTitle tag="h5">Users</CardTitle>
-              <CardText tag="h1">70%</CardText>
+              <CardTitle tag="h5" className="cardHeader">
+                Users
+              </CardTitle>
+              <CardText tag="h3">3189</CardText>
               <LineSeparator />
-              <CardText>
-                70% users did the Quiz and buy recommendation products
-              </CardText>
+              <CardText>3189 users did the Quiz.</CardText>
             </CardBody>
           </Card>
         </Col>
         <Col xs="3">
-          <Card>
+          <Card style={{ minHeight: "200px" }}>
             <CardBody>
-              <CardTitle tag="h5">Orders by Quiz</CardTitle>
-              <CardText tag="h1">4000</CardText>
+              <CardTitle tag="h5" className="cardHeader">
+                Average Order Value
+              </CardTitle>
+              <CardText tag="h3">$87.16</CardText>
               <LineSeparator />
-              <CardText>
-                4000 Orders were made to buy recommendation products
-              </CardText>
+              <CardText>The average order value is $87.16.</CardText>
             </CardBody>
           </Card>
         </Col>
         <Col xs="3">
-          <Card>
+          <Card style={{ minHeight: "200px" }}>
             <CardBody>
-              <CardTitle tag="h5">Revenue by Quiz</CardTitle>
-              <CardText tag="h1">13400$</CardText>
+              <CardTitle tag="h5" className="cardHeader">
+                Profit Per Purchase
+              </CardTitle>
+              <CardText tag="h3">$13</CardText>
               <LineSeparator />
-              <CardText>
-                13400$ Revenues produced by the recommendation products from
-                quiz
-              </CardText>
+              <CardText>$13 were made for every order</CardText>
             </CardBody>
           </Card>
         </Col>
@@ -144,15 +154,19 @@ const Home = () => {
               }}
             >
               <CardBody>
-                <CardTitle tag="h5">Total Clicks</CardTitle>
-                <CardText tag="h1">34%</CardText>
+                <CardTitle tag="h5" className="cardHeader">
+                  Clicks Through Rate
+                </CardTitle>
+                <CardText tag="h3">34%</CardText>
                 <LineSeparator />
-                <CardText>7000 clicks in lask week</CardText>
+                <CardText>
+                  The click through rate is 34% in the last week
+                </CardText>
               </CardBody>
               <CardBody>
-                <PieChart width={200} height={220}>
+                <PieChart width={250} height={220}>
                   <Pie
-                    data={data02}
+                    data={data03}
                     dataKey="value"
                     nameKey="name"
                     cx="50%"
@@ -162,11 +176,11 @@ const Home = () => {
                     paddingAngle={5}
                     label
                   >
-                    {data02.map((entry, index) => (
+                    {data03.map((entry, index) => (
                       <Cell fill={COLORS[index]} />
                     ))}
                     <Label position="center" fontSize="10" width={70}>
-                      Conversion Number 2000
+                      Click Through Rate 34%
                     </Label>
                   </Pie>
                   <Legend></Legend>
@@ -189,10 +203,12 @@ const Home = () => {
                   flex: 1
                 }}
               >
-                <CardTitle tag="h5">Total Click Trough Rate</CardTitle>
-                <CardText tag="h1">7000</CardText>
+                <CardTitle tag="h5" className="cardHeader">
+                  Total Clicks
+                </CardTitle>
+                <CardText tag="h3">7000</CardText>
                 <LineSeparator />
-                <CardText>The Click Through Rate is 34% last week</CardText>
+                <CardText>The Click number is 7000 last week.</CardText>
               </CardBody>
               <CardBody
                 style={{
@@ -201,9 +217,9 @@ const Home = () => {
                   justifyContent: "center"
                 }}
               >
-                <PieChart width={200} height={220}>
+                <PieChart width={250} height={220}>
                   <Pie
-                    data={data03}
+                    data={data02}
                     dataKey="value"
                     nameKey="name"
                     cx="50%"
@@ -213,11 +229,11 @@ const Home = () => {
                     paddingAngle={5}
                     label
                   >
-                    {data03.map((entry, index) => (
+                    {data02.map((entry, index) => (
                       <Cell fill={COLORS[index]} />
                     ))}
                     <Label position="center" fontSize="10" width={70}>
-                      Conversion Number 2000
+                      Total Clicks number 7000.
                     </Label>
                   </Pie>
                   <Legend></Legend>
@@ -228,6 +244,61 @@ const Home = () => {
           </Card>
         </Col>
       </Row>
+      <br></br>
+      <Row>
+        <Col xs="6">
+          <Card>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row"
+              }}
+            >
+              <CardBody
+                style={{
+                  flex: 1
+                }}
+              >
+                <CardTitle tag="h5" className="cardHeader">
+                  Conversion Rate
+                </CardTitle>
+                <CardText tag="h3">17%</CardText>
+                <LineSeparator />
+                <CardText>The conversion rate is 17% in the last week</CardText>
+              </CardBody>
+              <CardBody
+                style={{
+                  display: "flex",
+                  flex: 1,
+                  justifyContent: "center"
+                }}
+              >
+                <PieChart width={250} height={220}>
+                  <Legend></Legend>
+                  <Tooltip />
+                  <Pie
+                    dataKey="value"
+                    startAngle={180}
+                    endAngle={0}
+                    data={data04}
+                    cx="50%"
+                    cy="50%"
+                    outerRadius={60}
+                    innerRadius={45}
+                    label
+                  >
+                    {data04.map((entry, index) => (
+                      <Cell fill={colorOneItem[index]} />
+                    ))}
+                  </Pie>
+                </PieChart>
+              </CardBody>
+            </div>
+          </Card>
+        </Col>
+        <Col xs="6"></Col>
+      </Row>
+      <br></br>
     </Container>
   );
 };

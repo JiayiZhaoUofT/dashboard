@@ -29,6 +29,7 @@ import moment from "moment";
 import numeral from "numeral";
 import cubejs from "@cubejs-client/core";
 import Chart from "../components/Chart";
+import LineSeparator from "../components/LineSeperator";
 import { ctr_fp, data01, colorOneItem } from "../data/CTR1";
 import ChangeRate from "../components/ChangeRate";
 
@@ -44,7 +45,7 @@ const renderSingleValue = (resultSet, key) => (
 
 const FrontPage = () => {
   return (
-    <Container fluid className="mainPageContent">
+    <Container>
       <CardTitle tag="h4" style={{ color: "#8884d8" }}>
         Front Page Analysis
       </CardTitle>
@@ -52,25 +53,31 @@ const FrontPage = () => {
         <Col sm="4">
           <Card>
             <CardBody>
-              <CardTitle tag="h5">Click Through Rate on Front Page</CardTitle>
-              <CardText tag="h1">30%</CardText>
-              <ChangeRate number="15%" change="increase"></ChangeRate>
+              <CardTitle tag="h5" className="cardHeader">
+                Click Through Rate
+              </CardTitle>
+              <CardText tag="h3">30%</CardText>
+              {/* <ChangeRate number="15%" change="increase"></ChangeRate> */}
             </CardBody>
           </Card>
         </Col>
-        <Col sm="3">
+        <Col sm="4">
           <Card>
             <CardBody>
-              <CardTitle tag="h5">Total Clicks Numbers</CardTitle>
-              <CardText tag="h1">3000</CardText>
+              <CardTitle tag="h5" className="cardHeader">
+                Total Clicks Numbers
+              </CardTitle>
+              <CardText tag="h3">3000</CardText>
             </CardBody>
           </Card>
         </Col>
-        <Col sm="3">
+        <Col sm="4">
           <Card>
             <CardBody>
-              <CardTitle tag="h5">Impressions</CardTitle>
-              <CardText tag="h1">10000</CardText>
+              <CardTitle tag="h5" className="cardHeader">
+                Visits
+              </CardTitle>
+              <CardText tag="h3">10000</CardText>
             </CardBody>
           </Card>
         </Col>
@@ -80,21 +87,23 @@ const FrontPage = () => {
         <Col sm="4">
           <Card style={{ flexDirection: "row" }}>
             <CardBody>
-              <CardTitle tag="h5">Conversion Rate</CardTitle>
-              <CardText tag="h1">20%</CardText>
+              <CardTitle tag="h5" className="cardHeader">
+                Conversion Rate
+              </CardTitle>
+              <CardText tag="h3">20%</CardText>
 
               <CardText></CardText>
             </CardBody>
             <CardBody>
-              <PieChart width={120} height={120}>
+              <PieChart width={100} height={100}>
                 <Pie
                   data={data01}
                   dataKey="value"
                   nameKey="name"
                   cx="50%"
                   cy="50%"
-                  outerRadius={60}
-                  innerRadius={45}
+                  outerRadius={50}
+                  innerRadius={35}
                 >
                   {data01.map((entry, index) => (
                     <Cell fill={colorOneItem[index]} />
@@ -107,19 +116,21 @@ const FrontPage = () => {
             </CardBody>
           </Card>
         </Col>
-        <Col sm="3">
+        <Col sm="4">
           <Card>
             <CardBody>
               <CardTitle tag="h5">Number of Orders</CardTitle>
-              <CardText tag="h1">2000</CardText>
+              <CardText tag="h3">2000</CardText>
             </CardBody>
           </Card>
         </Col>
-        <Col sm="3">
+        <Col sm="4">
           <Card>
             <CardBody>
-              <CardTitle tag="h5">Revenue</CardTitle>
-              <CardText tag="h1">40000$</CardText>
+              <CardTitle tag="h5" className="cardHeader">
+                Revenue
+              </CardTitle>
+              <CardText tag="h3">$40000</CardText>
             </CardBody>
           </Card>
         </Col>
@@ -127,41 +138,49 @@ const FrontPage = () => {
       <br></br>
       <Row>
         <Col sm="4">
-          <Chart
-            cubejsApi={cubejsApi}
-            title="CTR Over Time"
-            query={{
-              measures: ["Users.count"],
-              timeDimensions: [
-                {
-                  dimension: "Users.createdAt",
-                  dateRange: ["2017-01-01", "2018-12-31"],
-                  granularity: "month"
-                }
-              ]
-            }}
-            render={resultSet => (
-              <ResponsiveContainer width="100%" height={300}>
-                <AreaChart data={resultSet.chartPivot()}>
-                  <XAxis dataKey="category" tickFormatter={dateFormatter} />
-                  <YAxis tickFormatter={numberFormatter} />
-                  <Tooltip labelFormatter={dateFormatter} />
-                  <Area
-                    type="monotone"
-                    dataKey="Users.count"
-                    name="Users"
-                    stroke="rgb(106, 110, 229)"
-                    fill="rgba(106, 110, 229, .16)"
-                  />
-                </AreaChart>
-              </ResponsiveContainer>
-            )}
-          />
+          <Card style={{ minHeight: "300px" }}>
+            <CardBody>
+              <CardTitle tag="h5" className="cardHeader">
+                CTR Over Time
+              </CardTitle>
+              <Chart
+                cubejsApi={cubejsApi}
+                query={{
+                  measures: ["Users.count"],
+                  timeDimensions: [
+                    {
+                      dimension: "Users.createdAt",
+                      dateRange: ["2017-01-01", "2018-12-31"],
+                      granularity: "month"
+                    }
+                  ]
+                }}
+                render={resultSet => (
+                  <ResponsiveContainer width="100%" height={250}>
+                    <AreaChart data={resultSet.chartPivot()}>
+                      <XAxis dataKey="category" tickFormatter={dateFormatter} />
+                      <YAxis tickFormatter={numberFormatter} />
+                      <Tooltip labelFormatter={dateFormatter} />
+                      <Area
+                        type="monotone"
+                        dataKey="Users.count"
+                        name="Users"
+                        stroke="rgb(106, 110, 229)"
+                        fill="rgba(106, 110, 229, .16)"
+                      />
+                    </AreaChart>
+                  </ResponsiveContainer>
+                )}
+              />
+            </CardBody>
+          </Card>
         </Col>
         <Col sm="4">
-          <Card>
+          <Card style={{ minHeight: "300px" }}>
             <CardBody>
-              <CardTitle tag="h5">Click Through Rate By device</CardTitle>
+              <CardTitle tag="h5" className="cardHeader">
+                Click Through Rate By device
+              </CardTitle>
               <ResponsiveContainer width="100%" height={300}>
                 <BarChart data={ctr_fp}>
                   <CartesianGrid strokeDasharray="3 3" />
@@ -179,18 +198,17 @@ const FrontPage = () => {
         <Col sm="4">
           <Card>
             <CardBody>
-              <CardTitle tag="h5">Click Through Rate By device</CardTitle>
-              <ResponsiveContainer width="100%" height={300}>
-                <BarChart data={ctr_fp}>
-                  <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="time" />
-                  <YAxis />
-                  <Bar dataKey="desktop" name="desktop" fill="#49457B" />
-                  <Bar dataKey="mobile" name="mobile" fill="#FF7C78" />
-                  <Legend></Legend>
-                  <Tooltip />
-                </BarChart>
-              </ResponsiveContainer>
+              <CardTitle tag="h5" className="cardHeader">
+                Average Order Value
+              </CardTitle>
+              <CardText tag="h3">$83</CardText>
+              <ChangeRate change="increase" number="12%"></ChangeRate>
+              <LineSeparator />
+              <CardTitle tag="h5" className="cardHeader">
+                Average Avenue per Oder
+              </CardTitle>
+              <CardText tag="h3">$10</CardText>
+              <ChangeRate change="increase" number="12%"></ChangeRate>
             </CardBody>
           </Card>
         </Col>

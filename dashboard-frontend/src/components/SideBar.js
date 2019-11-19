@@ -1,36 +1,82 @@
-import { Nav, NavItem, NavLink, Navbar, Container } from "reactstrap";
+import {
+  Nav,
+  NavItem,
+  NavLink,
+  Navbar,
+  Collapse,
+  NavbarToggler
+} from "reactstrap";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../css/sideBar.css";
 const SideBar = () => {
+  const [collapsed, setCollapsed] = useState(true);
+  const [type, setType] = useState("home");
+  const toggleNavbar = () => setCollapsed(!collapsed);
+  useEffect(() => {
+    console.log(type);
+  }, []);
+  useEffect(() => {
+    return console.log("bye bye");
+  });
   return (
-    <Container className="sideNavBar" style={{ padding: 0 }}>
-      <Navbar style={{ padding: 0 }}>
-        <Nav vertical style={{ width: "100%" }}>
-          <NavItem>
-            <NavLink href="/home" className="link">
-              Home
-            </NavLink>
-          </NavItem>
-          <NavItem>
-            <NavLink href="/quiz" className="link">
-              Quiz
-            </NavLink>
-          </NavItem>
-          <NavItem>
-            <NavLink href="/checkout" className="link">
-              Checkout
-            </NavLink>
-          </NavItem>
-          <NavItem>
-            <NavLink href="/searchbar">Searchbar</NavLink>
-          </NavItem>
-          <NavItem>
-            <NavLink href="/frontpage">Front Page</NavLink>
-          </NavItem>
-        </Nav>
+    <div className="sideNavBar">
+      <Navbar light>
+        <NavbarToggler onClick={toggleNavbar} />
+        <Collapse isOpen={collapsed} navbar>
+          <Nav vertical navbar>
+            <NavItem>
+              <NavLink
+                href="/home"
+                className="link"
+                active={type === "home"}
+                onClick={() => setType("home")}
+              >
+                Home
+              </NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink
+                href="/quiz"
+                className="link"
+                active={type === "quiz"}
+                onClick={() => setType("quiz")}
+              >
+                Quiz
+              </NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink
+                href="/checkout"
+                className="link"
+                active={type === "checkout"}
+                onClick={() => setType("checkout")}
+              >
+                Checkout
+              </NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink
+                href="/searchbar"
+                active={type === "searchbar"}
+                onClick={() => setType("searchbar")}
+              >
+                Search Bar
+              </NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink
+                href="/frontpage"
+                active={type === "frontpage"}
+                onClick={() => setType("frontpage")}
+              >
+                Front Page
+              </NavLink>
+            </NavItem>
+          </Nav>
+        </Collapse>
       </Navbar>
-    </Container>
+    </div>
   );
 };
 export default SideBar;
