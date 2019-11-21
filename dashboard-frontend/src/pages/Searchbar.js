@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Container, Row, Col } from "reactstrap";
 import {
   AreaChart,
@@ -15,7 +15,7 @@ import moment from "moment";
 import numeral from "numeral";
 import cubejs from "@cubejs-client/core";
 import Chart from "../components/Chart";
-
+import { useDispatch } from "react-redux";
 const cubejsApi = cubejs(process.env.REACT_APP_CUBEJS_TOKEN, {
   apiUrl: process.env.REACT_APP_API_URL
 });
@@ -26,6 +26,10 @@ const renderSingleValue = (resultSet, key) => (
   <h1 height={300}>{numberFormatter(resultSet.chartPivot()[0][key])}</h1>
 );
 const Searchbar = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch({ type: "tag", tag: "searchbar" });
+  }, []);
   return (
     <Container fluid className="mainPageContent">
       <Row>

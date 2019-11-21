@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useReducer, useEffect } from "react";
 
 import {
   Container,
@@ -24,29 +24,20 @@ import {
   Cell,
   Label
 } from "recharts";
-import moment from "moment";
-import numeral from "numeral";
-import cubejs from "@cubejs-client/core";
-import Chart from "../components/Chart";
+
 import LineSeparator from "../components/LineSeperator";
 import { data02, COLORS, data03, data04, colorOneItem } from "../data/CTR1";
 import "../css/home.css";
 import ChangeRate from "../components/ChangeRate";
-const cubejsApi = cubejs(process.env.REACT_APP_CUBEJS_TOKEN, {
-  apiUrl: process.env.REACT_APP_API_URL
-});
-const numberFormatter = item => numeral(item).format("0,0");
-const dateFormatter = item => moment(item).format("MMM YY");
-
-const renderSingleValue = (resultSet, key) => (
-  <h1 height={300}>{numberFormatter(resultSet.chartPivot()[0][key])}</h1>
-);
+import { useSelector, useDispatch } from "react-redux";
+import tagReducer from "../reducer/tagReducer";
 const Home = () => {
+  const dispatch = useDispatch();
+  const tag = useSelector(state => state);
+  useEffect(() => dispatch({ type: "tag", tag: "home" }), []);
+  useEffect(() => console.log("home", tag), [tag]);
   return (
     <Container>
-      <CardTitle tag="h4" style={{ color: "#8884d8" }}>
-        Home Overall Analytics
-      </CardTitle>
       <Row>
         <Col sm="4">
           <Card style={{ minHeight: "220px" }}>

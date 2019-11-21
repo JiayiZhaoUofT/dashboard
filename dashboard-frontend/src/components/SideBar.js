@@ -4,74 +4,51 @@ import {
   NavLink,
   Navbar,
   Collapse,
-  NavbarToggler
+  NavbarToggler,
+  NavbarBrand
 } from "reactstrap";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useReducer } from "react";
+import { useSelector } from "react-redux";
 import "../css/sideBar.css";
+
 const SideBar = () => {
   const [collapsed, setCollapsed] = useState(true);
-  const [type, setType] = useState("home");
+  let tag = useSelector(state => state.type);
   const toggleNavbar = () => setCollapsed(!collapsed);
+
   useEffect(() => {
-    console.log(type);
-  }, []);
-  useEffect(() => {
+    console.log("sidebar", tag);
     return console.log("bye bye");
   });
+  useEffect(() => {
+    console.log("sidebar", tag);
+  }, [tag]);
+
   return (
     <div className="sideNavBar">
+      <NavbarBrand>
+        <img src="images/favicon.png" height="40"></img>
+        TasteGURU
+      </NavbarBrand>
       <Navbar light>
         <NavbarToggler onClick={toggleNavbar} />
         <Collapse isOpen={collapsed} navbar>
           <Nav vertical navbar>
-            <NavItem>
-              <NavLink
-                href="/home"
-                className="link"
-                active={type === "home"}
-                onClick={() => setType("home")}
-              >
-                Home
-              </NavLink>
+            <NavItem active={tag === "home" ? true : false}>
+              <NavLink href="/home">Home</NavLink>
             </NavItem>
-            <NavItem>
-              <NavLink
-                href="/quiz"
-                className="link"
-                active={type === "quiz"}
-                onClick={() => setType("quiz")}
-              >
-                Quiz
-              </NavLink>
+            <NavItem active={tag === "quiz" ? true : false}>
+              <NavLink href="/quiz">Quiz</NavLink>
             </NavItem>
-            <NavItem>
-              <NavLink
-                href="/checkout"
-                className="link"
-                active={type === "checkout"}
-                onClick={() => setType("checkout")}
-              >
-                Checkout
-              </NavLink>
+            <NavItem active={tag === "checkout" ? true : false}>
+              <NavLink href="/checkout">Checkout</NavLink>
             </NavItem>
-            <NavItem>
-              <NavLink
-                href="/searchbar"
-                active={type === "searchbar"}
-                onClick={() => setType("searchbar")}
-              >
-                Search Bar
-              </NavLink>
+            <NavItem active={tag === "searchbar" ? true : false}>
+              <NavLink href="/searchbar">Search Bar</NavLink>
             </NavItem>
-            <NavItem>
-              <NavLink
-                href="/frontpage"
-                active={type === "frontpage"}
-                onClick={() => setType("frontpage")}
-              >
-                Front Page
-              </NavLink>
+            <NavItem active={tag === "frontpage" ? true : false}>
+              <NavLink href="/frontpage">Front Page</NavLink>
             </NavItem>
           </Nav>
         </Collapse>

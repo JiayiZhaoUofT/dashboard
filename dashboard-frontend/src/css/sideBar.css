@@ -1,9 +1,48 @@
-.mr-2 {
-  width: 20px;
-  height: 20px;
-  position: relative;
-  z-index: 100;
+.sideNavBar .navbar {
+  width: 100%;
+  padding: 0;
 }
+nav {
+  width: 100%;
+  padding: 0;
+}
+.navbar-brand {
+  color: white !important;
+}
+.sideNavBar .nav-link {
+  margin-left: 15px;
+  color: #ffffff !important;
+}
+
 .active {
-  background-color: aquamarine;
+  background-color: #38ada9;
+}
+.sideNavBar {
+  height: 100%; /* Full-height: remove this if you want "auto" height */
+  width: 160px; /* Set the width of the sidebar */
+  position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+  z-index: 2; /* Stay on top */
+  top: 0; /* Stay at the top */
+  left: 0;
+  background-color: #191f36; /* Black */
+  overflow-x: hidden; /* Disable horizontal scroll */
+  padding-top: 20px;
+}
+.navbar-toggler {
+  position: fixed;
+  left: 160px;
+  top: 0;
+}
+
+#main {
+  transition: margin-left 0.5s;
+  padding: 20px;
+}
+@media screen and (max-height: 450px) {
+  .sidenav {
+    padding-top: 15px;
+  }
+  .sidenav a {
+    font-size: 18px;
+  }
 }

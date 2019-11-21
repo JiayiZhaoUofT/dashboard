@@ -15,7 +15,8 @@ import moment from "moment";
 import numeral from "numeral";
 import cubejs from "@cubejs-client/core";
 import Chart from "../components/Chart";
-
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
 const cubejsApi = cubejs(process.env.REACT_APP_CUBEJS_TOKEN, {
   apiUrl: process.env.REACT_APP_API_URL
 });
@@ -26,6 +27,10 @@ const renderSingleValue = (resultSet, key) => (
   <h1 height={300}>{numberFormatter(resultSet.chartPivot()[0][key])}</h1>
 );
 const Quiz = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch({ type: "tag", tag: "quiz" });
+  }, []);
   return (
     <Container fluid className="mainPageContent">
       <Row>

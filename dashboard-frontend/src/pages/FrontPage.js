@@ -32,18 +32,19 @@ import Chart from "../components/Chart";
 import LineSeparator from "../components/LineSeperator";
 import { ctr_fp, data01, colorOneItem } from "../data/CTR1";
 import ChangeRate from "../components/ChangeRate";
-
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 const cubejsApi = cubejs(process.env.REACT_APP_CUBEJS_TOKEN, {
   apiUrl: process.env.REACT_APP_API_URL
 });
 const numberFormatter = item => numeral(item).format("0,0");
 const dateFormatter = item => moment(item).format("MMM YY");
 
-const renderSingleValue = (resultSet, key) => (
-  <h1 height={300}>{numberFormatter(resultSet.chartPivot()[0][key])}</h1>
-);
-
 const FrontPage = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch({ type: "tag", tag: "frontpage" });
+  }, []);
   return (
     <Container>
       <CardTitle tag="h4" style={{ color: "#8884d8" }}>

@@ -1,0 +1,19 @@
+.headerNavBar .navbar {
+  justify-content: flex-end;
+  /* background-color: palegoldenrod; */
+}
+.headerNavBar .nav {
+  align-items: center;
+  justify-content: flex-end;
+  color: white !important;
+}
+
+.headerNavBar {
+  position: fixed;
+  z-index: 1;
+  height: 50px;
+  /* width: 100%; */
+  right: 0;
+  left: 0;
+  background-color: #191f36;
+}
