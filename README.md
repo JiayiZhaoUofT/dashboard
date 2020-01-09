@@ -8,5 +8,4 @@ Cubejs has a great intent with microservices and databases.
 
 ## Pages
 
-![home page]
-(./ScreenShot/dashboard-overview.png)
+![home page](ScreenShot/homeScreenShot.png)
