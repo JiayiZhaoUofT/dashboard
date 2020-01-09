@@ -8,6 +8,5 @@ Cubejs has a great intent with microservices and databases.
 
 ## Pages
 
-![home page][logo]
-
+![home page]
 (https://github.com/JiayiZhaoUofT/dashboard/blob/master/ScreenShot/dashboard-overview.png)
